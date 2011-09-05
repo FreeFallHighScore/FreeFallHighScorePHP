@@ -1,6 +1,6 @@
 <?php
 	if(isset($_POST['submitForm'])) {
-	// new commit 7
+	// new commit 8
 
 		if (!defined("PHP_EOL"))
     		define("PHP_EOL", "\r\n");
