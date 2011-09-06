@@ -77,12 +77,19 @@ a:hover img {
 	width: 100%;
 	min-width: 1100px;
 }
+#apptag{
+	font-weight: 300;
+	line-height: 10pt;
+	font-size: 9pt;
+}
 p {
-	font: bold 12pt Verdana, sans-serif;
+	font-family: 'Ubuntu', sans-serif;
+	font-weight: 700;
+	font-size: 12pt;
 	letter-spacing: .1em;
-	line-height: 140%;
-	padding: 30px 80px;
-	width: 340px;
+	line-height: 130%;
+	padding: 35px 80px;
+	width: 360px;
 	color: #fff;
 	height: 270px;
 	display: inline;
