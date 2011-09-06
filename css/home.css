@@ -84,11 +84,11 @@ a:hover img {
 }
 p {
 	font-family: 'Ubuntu', sans-serif;
-	font-weight: 700;
+	font-weight: 500;
 	font-size: 12pt;
 	letter-spacing: .1em;
 	line-height: 130%;
-	padding: 35px 80px;
+	padding: 40px 80px;
 	width: 360px;
 	color: #fff;
 	height: 270px;

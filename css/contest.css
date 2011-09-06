@@ -36,7 +36,7 @@ strong {
 }
 body, html {
 
-	font-family: Verdana;
+	font-family: 'PT Sans', sans-serif;
 	font-size: 10pt;
 	height: 100%;
 	margin: 0;
@@ -95,7 +95,7 @@ textarea {
 	float: left;
 	font-weight: bold;
 	font-size: 16px;
-	font-family: Helvetica, sans-serif;
+	font-family: 'PT Sans', sans-serif;
 	text-align: left;
 	padding-left: 10px;
 }
@@ -128,7 +128,7 @@ a:active, a:hover, a:focus, a:visited, a {
 	color: #000;
 	font-weight: bold;
 	font-size: 16px;
-	font-family: Helvetica, sans-serif;
+	font-family: 'PT Sans', sans-serif;
 	clear: both;
 }
 #content p {
@@ -141,7 +141,7 @@ a:active, a:hover, a:focus, a:visited, a {
 .contenttxt {
 	font-weight: normal;
 	font-size: 16px;
-	font-family: Helvetica, sans-serif;
+	font-family: 'PT Sans', sans-serif;
 	line-height: 19px;
 }
 #content ul {
@@ -155,9 +155,9 @@ a:active, a:hover, a:focus, a:visited, a {
 	line-height: 18px;
 }
 .overview {
-	font-weight: bolder;
-	font-size: 18px;
-	font-family: Helvetica, sans-serif;
+	font-weight: 500;
+	font-size: 16px;
+	font-family: 'PT Sans', sans-serif;
 }
 #right_sb {
 	width: 203px;
@@ -178,7 +178,7 @@ a:active, a:hover, a:focus, a:visited, a {
 	top: 18px;
 	left: 45px;
 	font-weight: bolder;
-	font-family: Helvetica, sans-serif;
+	font-family: 'PT Sans', sans-serif;
 	font-size: 14px;
 	text-transform: uppercase;
 }
@@ -205,7 +205,8 @@ a:active, a:hover, a:focus, a:visited, a {
 }
 #sbBody ul li {
 	color: #fff;
-	font: 12px Helvetica, sans-serif;
+	font-family: 'PT Sans', sans-serif;
+	font-size: 12px
 	line-height: 18px;
 }
 .nobullet {
@@ -239,7 +240,7 @@ input.error {
 label.error {
 	color: red;
 	font-weight: bold;
-	font-family: Helvetica, sans-serif;
+	font-family: 'PT Sans', sans-serif;
 	font-size: 10px;
 	padding-left: 10px;
 }
@@ -297,7 +298,7 @@ label.error {
 	border-bottom: 1px solid #ddd;
 	color: #000;
 	font-weight: bold;
-	font-family: Helvetica, sans-serif;
+	font-family: 'PT Sans', sans-serif;
 	font-size: 14px;
 }
 .qq-success-button {
