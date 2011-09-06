@@ -78,7 +78,8 @@ a:hover img {
 	min-width: 1100px;
 }
 p {
-	font: bold 12pt Verdana, sans-serif;
+	font-family: 'Ubuntu', sans-serif;
+	font-weight: 700;
 	letter-spacing: .1em;
 	line-height: 140%;
 	padding: 30px 80px;
