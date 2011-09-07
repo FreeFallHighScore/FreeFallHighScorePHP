@@ -90,7 +90,7 @@ textarea {
 	width: 170px;
 	height: 15px;
 	padding: 5px 0px;
-	margin: 3px 23px;
+	margin: 1.5px 23px;
 	display: block;
 	float: left;
 	font-weight: bold;
@@ -207,6 +207,7 @@ a:active, a:hover, a:focus, a:visited, a {
 	color: #fff;
 	font-family: 'PT Sans', sans-serif;
 	font-size: 12px
+	font-heihgt: 80%;
 	line-height: 18px;
 }
 .nobullet {
