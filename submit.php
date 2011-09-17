@@ -1,6 +1,18 @@
 <?php
+require_once('recaptchalib.php');
+require_once('common.php');
+
 	if(isset($_POST['submitForm'])) {
-	// new commit 8
+		$resp = recaptcha_check_answer ($privatekey,
+                                $_SERVER["REMOTE_ADDR"],
+                                $_POST["recaptcha_challenge_field"],
+                                $_POST["recaptcha_response_field"]);
+		
+		if (!$resp->is_valid) {
+			// What happens when the CAPTCHA was entered incorrectly
+			echo '<div class="errormsgboxunder">The reCAPTCHA wasn\'t entered correctly. Go back and try it again.';
+			exit();
+		}
 
 		if (!defined("PHP_EOL"))
     		define("PHP_EOL", "\r\n");
@@ -25,8 +37,8 @@
 		$preservername = htmlentities($_POST['preservername'], ENT_QUOTES, 'UTF-8');
 		$description = htmlentities($_POST['description'], ENT_QUOTES, 'UTF-8');
 		$file1 = $baseurl.'uploads/'.htmlentities($_POST['file1'], ENT_QUOTES, 'UTF-8');
-		$file2 = $baseurl.'uploads/'.htmlentities($_POST['file2'], ENT_QUOTES, 'UTF-8');
-		$file3 = $baseurl.'uploads/'.htmlentities($_POST['file3'], ENT_QUOTES, 'UTF-8');
+		$file2 = ($_POST['file2'] == '') ? '' : $baseurl.'uploads/'.htmlentities($_POST['file2'], ENT_QUOTES, 'UTF-8');
+		$file3 = ($_POST['file3'] == '') ? '' : $baseurl.'uploads/'.htmlentities($_POST['file3'], ENT_QUOTES, 'UTF-8');
 		$detaillink = htmlentities($_POST['detaillink'], ENT_QUOTES, 'UTF-8');
 		// Additional Info
 		$comments = htmlentities($_POST['comments'], ENT_QUOTES, 'UTF-8');
@@ -34,16 +46,16 @@
 		
 				
 		if (trim($fname) == '') {
-		    echo '<div class="errormsgbox">Attention! You must enter your first name.</div>';
+		    echo '<div class="errormsgboxunder">Attention! You must enter your first name.</div>';
 		    exit();
 		} else if (trim($lname) == '') {
-		    echo '<div class="errormsgbox">Attention! You must enter your last name.</div>';
+		    echo '<div class="errormsgboxunder">Attention! You must enter your last name.</div>';
 		    exit();
 		} else if (trim($email) == '') {
-		    echo '<div class="errormsgbox">Attention! Please enter a valid email address.</div>';
+		    echo '<div class="errormsgboxunder">Attention! Please enter a valid email address.</div>';
 		    exit();
 		} else if (!isEmail($email)) {
-		    echo '<div class="errormsgbox">Attention! You have entered an invalid e-mail address, try again.</div>';
+		    echo '<div class="errormsgboxunder">Attention! You have entered an invalid e-mail address, try again.</div>';
 		    exit();
 		}
 		
@@ -52,13 +64,15 @@
 	        $description = stripslashes($description);
 	        $detaillink = stripslashes($detaillink);
 	    }
+		
+	    $e_subject = 'PRESERVER CONTEST: '.$fullname;
 
-	    $e_body = "$fname $lname has submitted the folowing information for the FFHS Preserver Contest:".PHP_EOL.PHP_EOL;
-	    $e_content = "$fname $lname".PHP_EOL."$email".PHP_EOL."$city".PHP_EOL.PHP_EOL."Preserver Name:".PHP_EOL."$preservername".PHP_EOL.PHP_EOL."Description: ".PHP_EOL."$description".PHP_EOL.PHP_EOL."Image 1: ";
+	    $e_body = "$fullname has submitted the folowing information for the FFHS Preserver Contest:".PHP_EOL.PHP_EOL;
+	    $e_content = "$fullname".PHP_EOL."$email".PHP_EOL."$city".PHP_EOL.PHP_EOL."Preserver Name:".PHP_EOL."$preservername".PHP_EOL.PHP_EOL."Description: ".PHP_EOL."\"$description\"".PHP_EOL.PHP_EOL."Image 1: ";
 	    $e_content2 = "$file1".PHP_EOL."Image 2: $file2".PHP_EOL."Image 3: $file3".PHP_EOL.PHP_EOL."More Details: $detaillink".PHP_EOL.PHP_EOL."Comments: ".PHP_EOL."\"$comments\"".PHP_EOL.PHP_EOL."Attendance: ".$attend.PHP_EOL.PHP_EOL;
 	    
-	    $msg = wordwrap($e_body.$e_content.$e_content2, 300);
-		$safefiles = str_replace(' ','-',$fname);
+	    $msg = wordwrap($e_body.$e_content.$e_content2, 70);
+		/*$safefiles = str_replace(' ','-',$fname);
 		$safefiles = $safefiles.'-'.str_replace(' ','-',$lname);
 		$safefiles = $safefiles.'-'.str_replace(' ','-',$preservername);
 
@@ -67,13 +81,19 @@
 		$fullFilePath = $entryDir.$entryFileName;
 		$entryFile = fopen($fullFilePath,'w') or die('can\'t open the file');
 		fwrite($entryFile, $msg);
-		fclose($entryFile);
+		fclose($entryFile);*/
 		
-		if(is_file($fullFilePath)) {
+		$headers .= "From: $address".PHP_EOL;
+	    $headers .= "Reply-To: $address".PHP_EOL;
+	    $headers .= "MIME-Version: 1.0".PHP_EOL;
+	    $headers .= "Content-type: text/plain; charset=utf-8".PHP_EOL;
+	    $headers .= "Content-Transfer-Encoding: quoted-printable".PHP_EOL;
+	    
+	    if (mail($address, $e_subject, $msg, $headers)) {
 	       		echo "<div class='successbox'>Thank you for submitting your preserver, $fname. You will hear from us soon!</div>";
 			exit(0);
 		} else {
-	    		echo '<div class="errormsgbox">Attention! There was an error while submitting the form, try again later.</div>';
+	    		echo '<div class="errormsgboxunder">Attention! There was an error while submitting the form, try again later.</div>';
 			exit(0);
 	    	}
 	}
@@ -295,6 +315,9 @@
 					<p>
 						Can you come to the event on October 13th?&nbsp;&nbsp;
 						<label for="attend_yes">Yes </label><input type="radio" id="attend_yes" name="attend" value="yes" />&nbsp;&nbsp;<label for="attend_no">No </label><input type="radio" id="attend_no" name="attend" value="no" />
+					</p>
+					<p>
+						<?php echo $captcha; ?>
 					</p>
 					<p>
 						<input type="hidden" name="submitForm" value="Submit" />

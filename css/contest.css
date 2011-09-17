@@ -274,6 +274,12 @@ label.error {
 	background-color: #FDD5CE;
 	background-image: url('../images/error.png');
 }
+.errormsgboxunder {
+	color: #D8000C;
+	width: 100% !important;
+	background-color: #FDD5CE;
+	background-image: url('../images/error.png');
+}
 /*
  * Uploader
  */
