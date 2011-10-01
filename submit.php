@@ -348,7 +348,7 @@ require_once('common.php');
 					<br>
 					<ul class="nobullet">
 						<li>
-							30 September, 2011
+							2 October, 2011
 						</li>
 					</ul>
 				</div>
