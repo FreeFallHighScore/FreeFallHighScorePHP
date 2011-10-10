@@ -1,6 +1,7 @@
 <?php
 require_once('recaptchalib.php');
 require_once('common.php');
+header("Location: http://contest.freefallhighscore.com");
 
 	if(isset($_POST['submitForm'])) {
 		$resp = recaptcha_check_answer ($privatekey,
